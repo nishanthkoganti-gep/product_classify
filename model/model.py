@@ -1,5 +1,8 @@
+# import modules
 import torch.nn as nn
 import torch.nn.functional as F
+
+# relative imports
 from base import BaseModel
 
 

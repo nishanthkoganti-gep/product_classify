@@ -49,10 +49,6 @@ def main(config):
             data, target = data.to(device), target.to(device)
             output = model(data)
 
-            #
-            # save sample images, or do something with output here
-            #
-
             # computing loss, metrics on test set
             loss = loss_fn(output, target)
             batch_size = data.shape[0]

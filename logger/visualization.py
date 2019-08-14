@@ -1,4 +1,7 @@
+# import modules
 import importlib
+
+# relative imports
 from utils import Timer
 
 
@@ -36,7 +39,7 @@ class TensorboardWriter():
             'add_text', 'add_histogram', 'add_pr_curve', 'add_embedding'
         }
         self.tag_mode_exceptions = {'add_histogram', 'add_embedding'}
-            
+
         self.timer = Timer()
 
     def set_step(self, step, mode='train'):

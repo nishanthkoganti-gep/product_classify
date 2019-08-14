@@ -1,8 +1,11 @@
-import numpy as np
+# import modules
 import torch
+import numpy as np
 from torchvision.utils import make_grid
-from base import BaseTrainer
+
+# relative imports
 from utils import inf_loop
+from base import BaseTrainer
 
 
 class Trainer(BaseTrainer):
