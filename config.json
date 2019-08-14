@@ -1,13 +1,13 @@
 {
-    "name": "Mnist_LeNet",
+    "name": "Amazon_Baseline",
     "n_gpu": 0,
 
     "arch": {
-        "type": "MnistModel",
+        "type": "CNNModel",
         "args": {}
     },
     "data_loader": {
-        "type": "MnistDataLoader",
+        "type": "AmazonDataLoader",
         "args":{
             "data_dir": "data/",
             "batch_size": 128,

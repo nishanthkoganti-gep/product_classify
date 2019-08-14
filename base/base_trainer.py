@@ -6,7 +6,7 @@ from logger import TensorboardWriter
 
 class BaseTrainer:
     """
-    Base class for all trainers
+    base class for all trainers
     """
     def __init__(self, model, loss, metrics, optimizer, config):
         self.config = config
@@ -51,7 +51,7 @@ class BaseTrainer:
     @abstractmethod
     def _train_epoch(self, epoch):
         """
-        Training logic for an epoch
+        training logic for an epoch
 
         :param epoch: Current epoch number
         """
@@ -59,7 +59,7 @@ class BaseTrainer:
 
     def train(self):
         """
-        Full training logic
+        full training logic
         """
         for epoch in range(self.start_epoch, self.epochs + 1):
             result = self._train_epoch(epoch)
@@ -126,7 +126,7 @@ class BaseTrainer:
 
     def _save_checkpoint(self, epoch, save_best=False):
         """
-        Saving checkpoints
+        saving checkpoints
 
         :param epoch: current epoch number
         :param log: logging information of the epoch
@@ -151,7 +151,7 @@ class BaseTrainer:
 
     def _resume_checkpoint(self, resume_path):
         """
-        Resume from saved checkpoints
+        resume from saved checkpoints
 
         :param resume_path: Checkpoint path to be resumed
         """
