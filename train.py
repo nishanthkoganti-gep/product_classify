@@ -1,12 +1,15 @@
+# import modules
+import torch
 import argparse
 import collections
-import torch
-import data_loader.data_loaders as module_data
-import model.loss as module_loss
-import model.metric as module_metric
-import model.model as module_arch
-from parse_config import ConfigParser
+
+# relative imports
 from trainer import Trainer
+import model.loss as module_loss
+import model.model as module_arch
+import model.metric as module_metric
+from parse_config import ConfigParser
+import data_loader.data_loaders as module_data
 
 
 def main(config):
@@ -24,8 +27,7 @@ def main(config):
     loss = getattr(module_loss, config['loss'])
     metrics = [getattr(module_metric, met) for met in config['metrics']]
 
-    # build optimizer, learning rate scheduler. delete every
-    # lines containing lr_scheduler for disabling scheduler
+    # build optimizer, learning rate scheduler
     trainable_params = filter(lambda p: p.requires_grad, model.parameters())
     optimizer = config.initialize('optimizer', torch.optim, trainable_params)
 

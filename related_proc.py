@@ -28,11 +28,15 @@ def main():
         related_lines = related_text.split('\n')
 
     # obtain product ids
-    valid_df = amazon_df[amazon_df['title'].notna()
-                         & amazon_df['description'].notna()]
+    valid_df = amazon_df[amazon_df['title'].notna() &
+                         amazon_df['description'].notna()]
     pids = list(valid_df.index.values)
     titles = valid_df['title'].to_dict()
     descriptions = valid_df['description'].to_dict()
+
+    related_pids = {}
+    related_titles = {}
+    related_descriptions = {}
 
     # loop over the rows and assign values
     counter = 0
@@ -48,13 +52,14 @@ def main():
         # loop over related items
         for rel_pid in related:
             if rel_pid in pids:
-                amazon_df.loc[pid, 'related_title'] = titles[rel_pid]
-                amazon_df.loc[pid, 'related_description'] = descriptions[rel_pid]
+                related_pids[pid] = rel_pid
+                related_titles[pid] = titles[rel_pid]
+                related_descriptions[pid] = descriptions[rel_pid]
                 break
 
         # counter analysis
         counter += 1
-        if counter % 1000 == 0:
+        if counter % 100 == 0:
             print(f'Counter: {counter}')
 
     keyboard()

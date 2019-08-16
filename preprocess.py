@@ -7,7 +7,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from os.path import join, realpath, dirname
-# from IPython.terminal.debugger import set_trace as keyboard
 
 # variables for performing text preprocessing
 lemmatizer = WordNetLemmatizer()
@@ -117,14 +116,14 @@ def main():
         labels_df['level1'] = labels_df['label'].apply(lambda x:
                                                        x.split(', ')[0])
         labels_df['level2'] = labels_df['label'].apply(lambda x:
-                                    ', '.join(x.split(', ')[:2])
-                                    if len(x.split(', ')) > 1 else '')
+                                                       ', '.join(x.split(', ')[:2])
+                                                       if len(x.split(', ')) > 1 else '')
         labels_df['level3'] = labels_df['label'].apply(lambda x:
-                                    ', '.join(x.split(', ')[:3])
-                                    if len(x.split(', ')) > 2 else '')
+                                                       ', '.join(x.split(', ')[:3])
+                                                       if len(x.split(', ')) > 2 else '')
         labels_df['level4'] = labels_df['label'].apply(lambda x:
-                                    ', '.join(x.split(', ')[:4])
-                                    if len(x.split(', ')) > 3 else '')
+                                                       ', '.join(x.split(', ')[:4])
+                                                       if len(x.split(', ')) > 3 else '')
         labels_df = labels_df.drop(columns=['label'])
 
         with open(join(data_path, 'labels.csv'), 'w') as f:

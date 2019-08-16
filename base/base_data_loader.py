@@ -10,8 +10,8 @@ class BaseDataLoader(DataLoader):
     """
     def __init__(self, dataset, batch_size, shuffle, validation_split,
                  num_workers, collate_fn=default_collate):
-        self.validation_split = validation_split
         self.shuffle = shuffle
+        self.validation_split = validation_split
 
         self.batch_idx = 0
         self.n_samples = len(dataset)
