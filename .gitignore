@@ -105,8 +105,9 @@ data/
 input/
 saved/
 datasets/
+embeddings/
 
 # editor, os cache directory
-.vscode/
 .idea/
+.vscode/
 __MACOSX/
