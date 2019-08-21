@@ -6,6 +6,7 @@ from torchvision.utils import make_grid
 # relative imports
 from utils import inf_loop
 from base import BaseTrainer
+from IPython.terminal.debugger import set_trace as keyboard
 
 
 class Trainer(BaseTrainer):
@@ -59,11 +60,11 @@ class Trainer(BaseTrainer):
 
         total_loss = 0
         total_metrics = np.zeros(len(self.metrics))
-        for batch_idx, (data, target) in enumerate(self.data_loader):
-            data, target = data.to(self.device), target.to(self.device)
+        for batch_idx, (title, desc, label) in enumerate(self.data_loader):
+            title, desc, target = title.to(self.device), desc.to(self.device), label.to(self.device)
 
             self.optimizer.zero_grad()
-            output = self.model(data)
+            output = self.model(title, desc)
             loss = self.loss(output, target)
             loss.backward()
             self.optimizer.step()
@@ -78,7 +79,6 @@ class Trainer(BaseTrainer):
                     epoch,
                     self._progress(batch_idx),
                     loss.item()))
-                self.writer.add_image('input', make_grid(data.cpu(), nrow=8, normalize=True))
 
             if batch_idx == self.len_epoch:
                 break
@@ -110,17 +110,16 @@ class Trainer(BaseTrainer):
         total_val_loss = 0
         total_val_metrics = np.zeros(len(self.metrics))
         with torch.no_grad():
-            for batch_idx, (data, target) in enumerate(self.valid_data_loader):
-                data, target = data.to(self.device), target.to(self.device)
+            for batch_idx, (title, desc, label) in enumerate(self.valid_data_loader):
+                title, desc, target = title.to(self.device), desc.to(self.device), label.to(self.device)
 
-                output = self.model(data)
+                output = self.model(title, desc)
                 loss = self.loss(output, target)
 
                 self.writer.set_step((epoch - 1) * len(self.valid_data_loader) + batch_idx, 'valid')
                 self.writer.add_scalar('loss', loss.item())
                 total_val_loss += loss.item()
                 total_val_metrics += self._eval_metrics(output, target)
-                self.writer.add_image('input', make_grid(data.cpu(), nrow=8, normalize=True))
 
         # add histogram of model parameters to the tensorboard
         for name, p in self.model.named_parameters():
