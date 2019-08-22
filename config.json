@@ -30,7 +30,7 @@
     },
     "loss": "cross_entropy",
     "metrics": [
-        "accuracy", "acc_top3"
+        "accuracy", "acc_top3", "f1_macro"
     ],
     "lr_scheduler": {
         "type": "StepLR",
