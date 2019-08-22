@@ -24,7 +24,7 @@ class AmazonDataset(Dataset):
 
         # compute n_samples and n_labels
         self.n_samples = valid_rows.sum()
-        self.n_labels = np.max(data[self.level].values)
+        self.n_labels = np.max(data[self.level].values) + 1
 
         # obtain titles and descriptions
         self.titles = data['title'][valid_rows]
