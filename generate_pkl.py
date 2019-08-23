@@ -6,6 +6,7 @@ import argparse
 import numpy as np
 import pandas as pd
 from os.path import dirname, realpath, join
+from IPython.terminal.debugger import set_trace as keyboard
 
 
 # function for tokenizing
@@ -190,7 +191,8 @@ def main():
 
     for lvl in levels:
         # generate lists of labels
-        lbls = set(list(train_df[lvl].values))
+        lbls = list(set(list(train_df[lvl].values)))
+        lbls.remove(np.nan)
 
         # generate dict mapping
         level2idx = {lbl: idx for idx, lbl in enumerate(lbls)}

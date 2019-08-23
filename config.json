@@ -5,7 +5,7 @@
     "arch": {
         "type": "CNNModel",
         "args": {
-            "num_classes": 33,
+            "num_classes": 32,
             "embed_file": "amazon.glove.300.csv"
         }
     },

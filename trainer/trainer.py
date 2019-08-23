@@ -33,6 +33,12 @@ class Trainer(BaseTrainer):
         self.lr_scheduler = lr_scheduler
         self.log_step = int(np.sqrt(data_loader.batch_size))
 
+        # initialize weights for loss function
+        self.weights = torch.from_numpy(self.data_loader.dataset.weights)
+        self.weights = self.weights.float()
+        if torch.cuda.is_available():
+            self.weights = self.weights.cuda()
+
     def _eval_metrics(self, output, target):
         acc_metrics = np.zeros(len(self.metrics))
         for i, metric in enumerate(self.metrics):
@@ -65,7 +71,7 @@ class Trainer(BaseTrainer):
 
             self.optimizer.zero_grad()
             output = self.model(title, desc)
-            loss = self.loss(output, target)
+            loss = self.loss(output, target, self.weights)
             loss.backward()
             self.optimizer.step()
 
@@ -114,7 +120,7 @@ class Trainer(BaseTrainer):
                 title, desc, target = title.to(self.device), desc.to(self.device), label.to(self.device)
 
                 output = self.model(title, desc)
-                loss = self.loss(output, target)
+                loss = self.loss(output, target, self.weights)
 
                 self.writer.set_step((epoch - 1) * len(self.valid_data_loader) + batch_idx, 'valid')
                 self.writer.add_scalar('loss', loss.item())

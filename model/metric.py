@@ -25,5 +25,8 @@ def f1_macro(output, target, average='macro'):
     with torch.no_grad():
         pred = torch.argmax(output, dim=1)
         assert pred.shape[0] == len(target)
+        if torch.cuda.is_available():
+            pred = pred.cpu()
+            target = target.cpu()
         f1_scr = f1_score(target, pred, average=average)
     return f1_scr

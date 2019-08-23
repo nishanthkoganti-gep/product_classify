@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from os.path import join
 from torch.utils.data import Dataset
+from sklearn.utils.class_weight import compute_class_weight
 
 # relative imports
 from base import BaseDataLoader
@@ -24,7 +25,7 @@ class AmazonDataset(Dataset):
 
         # compute n_samples and n_labels
         self.n_samples = valid_rows.sum()
-        self.n_labels = np.max(data[self.level].values) + 1
+        self.n_labels = np.unique(data[self.level].values)
 
         # obtain titles and descriptions
         self.titles = data['title'][valid_rows]
@@ -36,6 +37,11 @@ class AmazonDataset(Dataset):
         # obtain labels
         self.labels = data[self.level][valid_rows].values
         self.labels = self.labels.astype(np.int64)
+
+        # compute class weights
+        self.weights = compute_class_weight('balanced',
+                                            np.unique(self.labels),
+                                            self.labels)
 
     def __len__(self):
         return self.n_samples
