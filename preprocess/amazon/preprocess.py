@@ -63,7 +63,7 @@ def main():
 
     # setup directories
     root_dir = dirname(realpath(__file__))
-    data_path = join(root_dir, 'data')
+    data_path = join(root_dir, '..', 'data', 'amazon')
 
     if args.preload:
         # load the csv files

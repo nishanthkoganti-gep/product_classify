@@ -57,8 +57,8 @@ def main():
 
     # obtain root dir
     root_dir = dirname(realpath(__file__))
-    data_path = join(root_dir, 'data')
-    embed_path = join(root_dir, 'embeddings')
+    data_path = join(root_dir, '..', 'data', 'amazon')
+    embed_path = join(root_dir, '..', 'embeddings')
 
     # load csv file
     print('Load dataset')

@@ -7,7 +7,7 @@ from IPython.terminal.debugger import set_trace as keyboard
 def main():
     # setup data directory
     root_dir = dirname(realpath(__file__))
-    data_path = join(root_dir, 'data')
+    data_path = join(root_dir, '..', 'data', 'amazon')
 
     # load the amazon csv
     with open(join(data_path, 'amazon.csv'),
@@ -28,8 +28,7 @@ def main():
         related_lines = related_text.split('\n')
 
     # obtain product ids
-    valid_df = amazon_df[amazon_df['title'].notna() &
-                         amazon_df['description'].notna()]
+    valid_df = amazon_df[amazon_df['title'].notna() & amazon_df['description'].notna()]
     pids = list(valid_df.index.values)
     titles = valid_df['title'].to_dict()
     descriptions = valid_df['description'].to_dict()

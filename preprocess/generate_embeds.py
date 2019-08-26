@@ -24,7 +24,7 @@ def main():
 
     # setup directory name
     root_dir = dirname(realpath(__file__))
-    embed_path = join(root_dir, 'embeddings')
+    embed_path = join(root_dir, '..', 'embeddings')
 
     # setup embedding parameters
     idx = 0

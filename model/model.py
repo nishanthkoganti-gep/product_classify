@@ -27,7 +27,7 @@ def create_emb_layer(embed_file, trainable=True):
     return emb_layer, n_embeds, embed_dim
 
 
-class CNNModel(BaseModel):
+class AmzCNNModel(BaseModel):
     def __init__(self, num_classes=32, embed_file='amazon.glove.300.csv',
                  in_channels=1, out_channels=128, kernel_heights=[2, 3, 4],
                  keep_prob=0.6, trainable=True):
