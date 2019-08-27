@@ -7,7 +7,7 @@ from IPython.terminal.debugger import set_trace as keyboard
 def main():
     # setup data directory
     root_dir = dirname(realpath(__file__))
-    data_path = join(root_dir, '..', 'data', 'amazon')
+    data_path = join(root_dir, '..', '..', 'data', 'amazon')
 
     # load the amazon csv
     with open(join(data_path, 'amazon.csv'),
