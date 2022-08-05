@@ -5,7 +5,7 @@ flake8==3.7.7
 numpy==1.17.0
 pandas==0.25.0
 ipython==7.7.0
-pyarrow==0.14.0
+pyarrow==0.15.1
 jupyterlab==1.0.5
 tensorboardX==1.8
 scikit-learn==0.21.3
